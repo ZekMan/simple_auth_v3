@@ -1,37 +1,22 @@
 <?php
 include_once 'conf.php';
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-	<title></title>
-</head>
-<body>
-<?php
-$reg = new auth();  //~ Создаем новый объект класса
+$auth = new auth();
 $r='';
 $form='
 	<form action="" method="post">
-		логин <input type="text" name="login" id="" value="'.@$_POST['login'].'" /><br />
-		Почта <input type="text" name="mail" value="" /><br />
+		Login <input type="text" name="login" id="" value="'.@$_POST['login'].'" /><br />
+		E-mail <input type="text" name="mail" value="'.@$_POST['mail'].'" /><br />
 		<input type="submit" value="send" name="send" />
 	</form>
 ';
 
 if (isset($_POST['send'])) {
-	//~ запрос на восстановление пароля
-	$reply = $reg->recovery_pass($_POST['login'], $_POST['mail']);
-	if ($reply=='good') {
-		//~ положительный ответ
-		$r.='Новый пароль был выслан вам на почту';
+	if ($auth->recovery_pass($_POST['login'], $_POST['mail'])) {
+		$r.='A new password has been sent to your inbox. <a href="/index.php">Login</a>';
 	} else {
-		//~ ошибка во время восстановления
-		$r.=$reply.$form;
+		$r.=$auth->error_reporting().$form;
 	}
 } else $r.=$form;
-print $r;
 
+print $r;
 ?>
-</body>
-</html>

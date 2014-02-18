@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Фев 19 2014 г., 02:47
+-- Время создания: Фев 19 2014 г., 04:52
 -- Версия сервера: 5.5.33-0+wheezy1
 -- Версия PHP: 5.4.4-14+deb7u5
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `session` (
   `code_sess` varchar(15) NOT NULL,
   `user_agent_sess` varchar(255) NOT NULL,
   `date_sess` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `used_sess` int(20) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_sess`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
@@ -49,14 +50,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sex_user` int(1) NOT NULL,
   `key_user` varchar(10) NOT NULL,
   PRIMARY KEY (`id_user`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id_user`, `login_user`, `passwd_user`, `mail_user`, `sex_user`, `key_user`) VALUES
-(1, 'test', '209eb468599b8dda676ea6be5f3ed789', 'zekman@zekman.ru', 1, 't6dnQI2Oum');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
